@@ -1,0 +1,3 @@
+# Only for the ONE-TIME ST-GCN -> ONNX export (export_stgcn.py). Never needed at runtime.
+torch
+onnx

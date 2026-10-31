@@ -1,0 +1,17 @@
+[Unit]
+Description=signtalk: live ASL sign lookup -> speech
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=__USER__
+WorkingDirectory=__DIR__
+# 640x480 @ 15 fps, no face model: the starting point for a Pi 5. Re-run --calibrate on the Pi first.
+ExecStart=__DIR__/.venv/bin/python realtime.py --width 640 --height 480 --fps 15 --threads 3 --no-face
+Restart=on-failure
+RestartSec=3
+SupplementaryGroups=audio video
+# USB audio / I2S / Bluetooth: set the ALSA default (e.g. ~/.asoundrc); Pi 5 has no 3.5 mm jack.
+
+[Install]
+WantedBy=multi-user.target

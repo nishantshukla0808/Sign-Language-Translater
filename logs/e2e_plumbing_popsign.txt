@@ -1,0 +1,9 @@
+[warmup] one dummy inference: 9 ms (popsign)
+running  640x480  model=popsign  face=off  vocab=250  speech=phrase(0.4s)  reject<0.1    ctrl-c to stop
+
+[log] sessions/20261029_200358
+[ 23f] before:0.13  have:0.05  there:0.05   -> BEFORE (confident)  [8 ms]
+   >> SAY: before
+
+frames=75  tracking ms p50/p95=40.6/48.2  classify ms p50/p95=7.7/7.7  capture-dropped=0  audio-dropped=0
+transcript: before
