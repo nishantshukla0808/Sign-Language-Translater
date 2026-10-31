@@ -1,0 +1,6 @@
+# Runtime (laptop and Pi). No PyTorch here.
+# Tested in this repo's CI-less sandbox with mediapipe 1.2.0 / onnxruntime 1.29 / numpy 2.5 / opencv 5.0 on Python 3.13.
+mediapipe>=1.0
+onnxruntime
+numpy
+opencv-python          # use opencv-python-headless on a Pi without a desktop (then --show is unavailable)

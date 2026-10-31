@@ -1,0 +1,7 @@
+mediapipe 1.2.0
+thumb_up hands: [(21, 'Right')] pose: [] face: []
+pointing_up hands: [(21, 'Right')] pose: [] face: []
+woman_hands hands: [(21, 'Left'), (21, 'Right')] pose: [33] face: [478]
+pose hands: [] pose: [33] face: []
+portrait hands: [] pose: [33] face: [478]
+male_full_height_hands hands: [(21, 'Left'), (21, 'Right')] pose: [33] face: []

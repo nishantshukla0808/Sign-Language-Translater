@@ -1,0 +1,34 @@
+SELFTEST -- PLUMBING ONLY, says nothing about accuracy.
+
+[aslcitizen] NOTE: real gloss names unavailable -> labels are 'sign_<index>' (0..2730). Supply models/aslcitizen_gloss.json ({index: name}) to swap them in.
+  synthetic landmarks : gate windows=1 frames=[23]  PASS
+  video decode+MediaPipe: frames=30 fps=15.0 hands-in-frames=0.00 (expected 0: noise has no person)  PASS
+
+========================================================================
+EVAL SUMMARY  model=aslcitizen  clips scored=2  skipped=0
+  NOTE: label names are 'sign_<index>' placeholders (real glosses unavailable)
+  WARNING: only 2 clips -- intervals below are wide; do not over-read these numbers.
+========================================================================
+
+WHOLE-CLIP (entire clip = one window)
+  top-1                              (suppressed: plumbing only, says nothing about accuracy)
+  top-3                              (suppressed: plumbing only, says nothing about accuracy)
+
+GATE-SEGMENTED (live MotionGate replay; longest window; zero windows = wrong)
+  top-1                              (suppressed: plumbing only, says nothing about accuracy)
+  top-3                              (suppressed: plumbing only, says nothing about accuracy)
+  top-1 on ANY window                (suppressed: plumbing only, says nothing about accuracy)
+  windows per clip:  zero=1  one=1  several=0
+
+LANDMARK PRESENCE (mean over all frames of all clips)
+  left hand                             63.4% of frames
+  right hand                            63.4% of frames
+  either hand                           63.4% of frames
+  both shoulders (gate needs these)     63.4% of frames
+  1 clip(s) had a hand in <50% of frames (tracking failure, not classifier): synthetic.mp4
+
+(per-label table and confusions suppressed: plumbing only)
+
+  wrote /tmp/evalselftest_46nnhx2l/eval_results.csv (19 columns)
+
+SELFTEST OK -- plumbing only, says nothing about accuracy.

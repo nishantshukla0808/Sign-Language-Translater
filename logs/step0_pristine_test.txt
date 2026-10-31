@@ -1,0 +1,42 @@
+1. landmark assembly
+  PASS  shape (543, 3) == (543, 3)
+  PASS  face block is NaN (not supplied)
+  PASS  LHand block finite
+  PASS  RHand block finite
+  PASS  Pose block finite
+  PASS  hands_present == 2
+  PASS  detected_points == 75 (21+33+21), got 75
+  PASS  empty frame is all-NaN
+
+2. ring buffer
+  PASS  len capped at 4, got 4
+  PASS  stack shape (4, 543, 3)
+
+3. motion gate state machine
+  PASS  stays idle while still
+  PASS  entered recording on motion
+  PASS  emitted exactly 1 window, got 1
+  PASS  window shape (23, 543, 3)
+  PASS  window length 23 in [10, 90]
+  PASS  returned to idle
+
+4. classifier
+  PASS  vocab size 250 == 250
+  PASS  probs shape (250,)
+  PASS  probs sum to 1 (1.000000)
+  PASS  all probs in [0,1]
+       top-3 on synthetic noise: [('arm', 0.011), ('police', 0.01), ('table', 0.009)]
+
+5. token admitter
+  PASS  single tick does not commit
+  PASS  second identical tick commits via 'stable'
+  PASS  mid-confidence with credible runner-up commits via 'band'
+  PASS  refractory blocks immediate repeat
+
+6. latency on variable window lengths
+       T= 16    4.87 ms/inference
+       T= 32    5.92 ms/inference
+       T= 48    7.60 ms/inference
+       T= 64    9.01 ms/inference
+
+ALL CHECKS PASSED

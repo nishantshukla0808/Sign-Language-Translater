@@ -1,0 +1,10 @@
+[aslcitizen] NOTE: real gloss names unavailable -> labels are 'sign_<index>' (0..2730). Supply models/aslcitizen_gloss.json ({index: name}) to swap them in.
+[warmup] one dummy inference: 78 ms (aslcitizen)
+running  640x480  model=aslcitizen  face=off  vocab=2731  speech=phrase(1.5s)  reject<0.0    ctrl-c to stop
+
+[log] sessions/20261029_200405
+[ 23f] sign_2276:0.91  sign_2576:0.05  sign_2634:0.03   -> SIGN_2276 (confident)  [84 ms]
+   >> SAY: sign_2276
+
+frames=75  tracking ms p50/p95=40.8/49.7  classify ms p50/p95=83.5/83.5  capture-dropped=0
+transcript: sign_2276

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+models/*.onnx
+models/*.pt
+models/*.task
+models/*.zip
+sessions/
+wavs/
+eval_clips/
+eval_results.csv
+calibration.json
+logs_*.txt
+*.tar.gz

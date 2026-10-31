@@ -1,0 +1,19 @@
+checkpoint: 172 tensors, classes=2731, params=3.79 M, dtype=torch.float32, A=(3, 27, 27), data_bn=(54,)
+wrote /home/user/nishu_hand_skeleton/signtalk/models/aslcitizen_stgcn.onnx (15.2 MB, torch.float32)
+parity [float32 deployed model]: ONNX vs ORIGINAL torch forward (unmodified encoder, checkpoint weights)
+  batch=1 T=128  max|diff|=1.373e-04   (|logit| up to 214, rel 6.4e-07)  argmax-equal=True
+  batch=1 T=64   max|diff|=1.526e-04   (|logit| up to 237, rel 6.4e-07)  argmax-equal=True
+  batch=1 T=100  max|diff|=1.526e-04   (|logit| up to 211, rel 7.2e-07)  argmax-equal=True
+  batch=1 T=37   max|diff|=2.136e-04   (|logit| up to 231, rel 9.3e-07)  argmax-equal=True
+  batch=3 T=128  max|diff|=2.136e-04   (|logit| up to 248, rel 8.6e-07)  argmax-equal=True
+wrote /home/user/nishu_hand_skeleton/signtalk/models/aslcitizen_stgcn_fp64.onnx (30.4 MB, torch.float64)
+parity [float64 structural check, onnx ReferenceEvaluator]: ONNX vs ORIGINAL torch forward (unmodified encoder, checkpoint weights)
+  batch=1 T=128  max|diff|=1.471e-09   (|logit| up to 214, rel 6.9e-12)  argmax-equal=True
+  batch=1 T=64   max|diff|=1.622e-09   (|logit| up to 237, rel 6.8e-12)  argmax-equal=True
+  batch=1 T=100  max|diff|=1.531e-09   (|logit| up to 211, rel 7.3e-12)  argmax-equal=True
+  batch=1 T=37   max|diff|=1.434e-09   (|logit| up to 231, rel 6.2e-12)  argmax-equal=True
+  batch=3 T=128  max|diff|=1.670e-09   (|logit| up to 248, rel 6.7e-12)  argmax-equal=True
+=== summary ===
+  float32 deployed ONNX : worst max abs diff 2.136e-04  -> NOT < 1e-4 (the strict 1e-4 criterion)
+  float64 same graph    : worst max abs diff 1.670e-09  -> PASS (graph is structurally exact)
+  float32 misses 1e-4 only through float32 rounding on random logits of magnitude ~200 (torch float32 vs torch float64 differs by the same order); structure verified in float64.

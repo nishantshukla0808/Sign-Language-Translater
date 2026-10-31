@@ -1,0 +1,6 @@
+woman_hands pose L-wrist(15) x=0.37  R-wrist(16) x=0.43
+   hand label=Left wrist x=0.39 nearest-pose-wrist=pose15(L)
+   hand label=Right wrist x=0.47 nearest-pose-wrist=pose16(R)
+male_full_height_hands pose L-wrist(15) x=0.59  R-wrist(16) x=0.24
+   hand label=Left wrist x=0.60 nearest-pose-wrist=pose15(L)
+   hand label=Right wrist x=0.24 nearest-pose-wrist=pose16(R)

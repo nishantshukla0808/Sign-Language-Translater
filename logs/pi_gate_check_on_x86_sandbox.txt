@@ -1,0 +1,9 @@
+  FAIL 64-bit ARM (aarch64)               got 'x86_64' -- need 64-bit Raspberry Pi OS (32-bit has no mediapipe wheels)
+  PASS glibc >= 2.28                      2.39
+  PASS libEGL.so.1 present                ok
+  PASS pip install mediapipe+deps         1.2.0
+  PASS mediapipe import                   OK 1.2.0
+  PASS onnxruntime import                 ok
+  PASS .task bundles present              models/
+  PASS HandLandmarker+Pose run            OK hands+pose on a BLANK 640x480 frame: median 25.0 ms (blank frame: a lower bound, real frames with hands cost more)
+VERDICT: GATE 2 FAIL (1 failing check(s) above). Do not proceed; see README 'If GATE 2 fails'.

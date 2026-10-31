@@ -1,0 +1,14 @@
+eval_clips.py: nothing to evaluate.
+
+  clips dir   : eval_clips/   (missing)
+  labels file : eval_clips/labels.csv   (missing)
+
+Usage:
+  1. Put video files (.avi, .m4v, .mkv, .mov, .mp4, .webm) in eval_clips/
+  2. Create eval_clips/labels.csv with a header and one row per clip:
+         filename,label
+         apple_01.mp4,apple
+     (PopSign-250 glosses for --model popsign; see models/sign_to_prediction_index_map.json)
+  3. python eval_clips.py [--model popsign|aslcitizen]
+
+To check the harness wiring without clips:  python eval_clips.py --selftest
