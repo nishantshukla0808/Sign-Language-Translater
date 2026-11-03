@@ -1,0 +1,38 @@
+{
+ "hii": {
+  "label": "Hi",
+  "speak": "Hi"
+ },
+ "thank_you": {
+  "label": "Thank you",
+  "speak": "Thank you"
+ },
+ "welcome": {
+  "label": "Welcome",
+  "speak": "Welcome"
+ },
+ "good_morning": {
+  "label": "Good morning",
+  "speak": "Good morning"
+ },
+ "good_afternoon": {
+  "label": "Good afternoon",
+  "speak": "Good afternoon"
+ },
+ "have_a_good_day": {
+  "label": "Have a good day",
+  "speak": "Have a good day"
+ },
+ "nice_to_meet_you": {
+  "label": "Nice to meet you",
+  "speak": "Nice to meet you"
+ },
+ "how_are_you": {
+  "label": "How are you?",
+  "speak": "How are you?"
+ },
+ "i_am_fine": {
+  "label": "I am fine",
+  "speak": "I am fine"
+ }
+}

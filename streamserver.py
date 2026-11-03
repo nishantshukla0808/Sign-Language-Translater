@@ -10,8 +10,12 @@ import cv2
 
 
 class StreamServer:
-    def __init__(self, port: int):
+    def __init__(self, port: int, button: str | None = None):
+        """button: label of an optional Start button on the page; clicking it sets self.started."""
         self.jpg: bytes | None = None
+        self.started = threading.Event()
+        if button is None:
+            self.started.set()
         outer = self
 
         class H(BaseHTTPRequestHandler):
@@ -33,13 +37,25 @@ class StreamServer:
                     except (BrokenPipeError, ConnectionResetError):
                         return
                 else:
-                    body = (b"<html><body style='margin:0;background:#111'>"
-                            b"<img src='/stream' style='width:100%;max-width:1100px'></body></html>")
+                    btn = ("<button onclick=\"fetch('/go',{method:'POST'});this.disabled=true;this.textContent='running...'\" "
+                           "style='font-size:22px;padding:14px 28px;margin:10px;border:0;border-radius:10px;"
+                           f"background:#2e8b57;color:#fff'>{button}</button>" if button else "")
+                    body = ("<html><body style='margin:0;background:#111'>" + btn +
+                            "<img src='/stream' style='width:100%;max-width:1100px;display:block'></body></html>").encode()
                     self.send_response(200)
                     self.send_header("Content-Type", "text/html")
                     self.end_headers()
                     self.wfile.write(body)
 
+        outer_started = self.started
+
+        def do_POST(self):
+            outer_started.set()
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"ok")
+
+        H.do_POST = do_POST
         self.httpd = ThreadingHTTPServer(("0.0.0.0", port), H)
         threading.Thread(target=self.httpd.serve_forever, daemon=True, name="stream").start()
 
