@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12161c">
+<meta name="color-scheme" content="dark">
+<title>SignTalk</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<div class="app">
+  <header class="top">
+    <div class="brand"><img src="/icon.svg" alt="" width="34" height="34"><div><b>SignTalk</b><span>Sign to speech</span></div></div>
+    <div class="pills">
+      <span class="pill" id="pPi" title="Raspberry Pi connection"><i class="dot"></i><em>Pi</em></span>
+      <span class="pill" id="pBody" title="Head and shoulders in view"><i class="dot"></i><em>Body</em></span>
+      <span class="pill" id="pHands" title="Hands in view"><i class="dot"></i><em>Hands 0</em></span>
+      <span class="pill hide-sm" id="pFps"><em>– fps</em></span>
+      <button class="icon-btn" id="btnSettings" aria-label="Settings"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M19.4 13a7.9 7.9 0 000-2l2-1.6a.5.5 0 00.1-.6l-1.9-3.3a.5.5 0 00-.6-.2l-2.4 1a7.5 7.5 0 00-1.7-1l-.4-2.5a.5.5 0 00-.5-.4h-3.8a.5.5 0 00-.5.4l-.4 2.5a7.5 7.5 0 00-1.7 1l-2.4-1a.5.5 0 00-.6.2L2.6 8.8a.5.5 0 00.1.6l2 1.6a7.9 7.9 0 000 2l-2 1.6a.5.5 0 00-.1.6l1.9 3.3c.1.2.4.3.6.2l2.4-1c.5.4 1.1.7 1.7 1l.4 2.5c0 .2.2.4.5.4h3.8c.3 0 .5-.2.5-.4l.4-2.5c.6-.3 1.2-.6 1.7-1l2.4 1c.2.1.5 0 .6-.2l1.9-3.3a.5.5 0 00-.1-.6zM12 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg></button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="stage">
+      <div class="viewport" id="vp">
+        <video id="video" playsinline muted autoplay></video>
+        <canvas id="overlay"></canvas>
+        <div class="hud">
+          <div class="hint" id="hint"></div>
+          <div class="big" id="big"></div>
+          <div class="rec" id="rec"><i></i><span id="recTxt">REC</span></div>
+          <div class="progress" id="progress"><b></b></div>
+        </div>
+        <div class="loading" id="loading"><div class="spinner"></div><p id="loadTxt">Starting…</p></div>
+      </div>
+      <p class="tip">Prop the phone up in <b>landscape</b>. Keep your <b>head, shoulders and both hands</b> inside the picture.</p>
+    </section>
+
+    <section class="panel">
+      <nav class="tabs" role="tablist">
+        <button class="tab on" data-tab="translate" role="tab">Translate</button>
+        <button class="tab" data-tab="teach" role="tab">Teach</button>
+      </nav>
+
+      <div class="view on" id="v-translate">
+        <div class="seg" id="modeSeg" role="tablist"><button data-m="auto" class="on">Hands-free</button><button data-m="tap">Tap to sign</button></div>
+        <div class="card result" id="result" data-state="idle">
+          <div class="kicker" id="kicker">Ready</div>
+          <div class="phrase" id="phrase">Tap, then sign</div>
+          <div class="conf"><span class="bar"><i id="confBar"></i></span><b id="confTxt"></b></div>
+          <p class="msg" id="msg">Press the button, wait for the countdown and sign one phrase.</p>
+          <ul class="alts" id="alts"></ul>
+        </div>
+        <div class="live" id="live"><i></i><span id="liveTxt">Starting…</span></div>
+        <button class="cta" id="btnSign" disabled><span class="ring"></span><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 14a3 3 0 003-3V6a3 3 0 10-6 0v5a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V21h2v-3.1A7 7 0 0019 11z"/></svg><span id="ctaTxt">Tap to sign</span></button>
+        <div class="row-h"><h3>Phrases I know</h3><button class="link" id="btnMute">🔊 Voice on</button></div>
+        <div class="chips" id="known"></div>
+        <div class="row-h"><h3>History</h3></div>
+        <div class="chips hist" id="history"><span class="empty">Nothing yet</span></div>
+      </div>
+
+      <div class="view" id="v-teach">
+        <div class="card">
+          <h3>Teach SignTalk from this phone</h3>
+          <p class="muted">Record clips with <em>this</em> camera so the model learns how you look from here. Record at least 5 for each phrase, 15–20 is better, then retrain.</p>
+          <label class="field"><span>Phrase</span>
+            <select id="teachSel"></select>
+          </label>
+          <label class="field" id="newWrap" hidden><span>New phrase name</span>
+            <input id="teachNew" type="text" maxlength="40" placeholder="e.g. good night" autocomplete="off">
+          </label>
+          <div class="count" id="teachCount"></div>
+          <button class="cta alt" id="btnTeach" disabled><span class="ring"></span><svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="7" fill="currentColor"/></svg><span>Record a clip</span></button>
+          <div class="row-btn"><button class="ghost" id="btnUndo">Undo last clip</button></div>
+          <p class="msg" id="teachMsg"></p>
+        </div>
+        <div class="card">
+          <h3>Retrain the model</h3>
+          <p class="muted">Trains on every recorded clip (all people, all phrases). Takes a few minutes on the Pi; the app keeps working and switches to the new model by itself.</p>
+          <button class="cta alt" id="btnRetrain"><span>Retrain now</span></button>
+          <div class="trainbar" id="trainBar" hidden><i></i></div>
+          <p class="msg" id="trainMsg"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" class="sheet">
+    <div class="sheet-head"><h2>Settings</h2><button class="icon-btn" value="close" aria-label="Close">✕</button></div>
+    <label class="field"><span>Camera</span>
+      <select id="setCam"><option value="environment">Rear camera</option><option value="user">Front camera</option></select></label>
+    <label class="field"><span>Camera quality</span>
+      <select id="setRes"><option value="360">Fast (640×360)</option><option value="720">HD (1280×720)</option><option value="1080">Full HD (1920×1080)</option></select></label>
+    <label class="field"><span>Countdown before signing</span>
+      <select id="setCd"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+    <label class="field"><span>Confidence needed <b id="thrTxt"></b></span><input id="setThr" type="range" min="0.3" max="0.9" step="0.05"></label>
+    <label class="field"><span>Hands-free trigger height</span>
+      <select id="setRaise"><option value="0.65">Low sensitivity (hands must be high)</option><option value="0.8">Normal</option><option value="0.92">High sensitivity (any lifted hand)</option></select></label>
+    <label class="field"><span>Voice</span><select id="setVoice"></select></label>
+    <label class="field"><span>Volume <b id="volTxt"></b></span><input id="setVol" type="range" min="0" max="1" step="0.05"></label>
+    <label class="check"><input id="setBeep" type="checkbox"> <span>Beep when signing starts</span></label>
+    <label class="check"><input id="setGpu" type="checkbox"> <span>Use the phone GPU for tracking (reload to apply)</span></label>
+    <div class="row-btn"><button class="ghost" id="btnTestVoice" type="button">Test voice</button><button class="ghost" id="btnReload" type="button">Reload page</button></div>
+    <p class="muted small" id="aboutTxt"></p>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
