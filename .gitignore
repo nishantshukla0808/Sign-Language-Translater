@@ -12,11 +12,10 @@ eval_results.csv
 calibration.json
 logs_*.txt
 *.tar.gz
-data/
+data/**/*.mp4
 webapp/static/_test/
 webapp/certs/
 webapp/.gzcache/
-webapp/static/mp/
 models/backup/
 models/_new/
 iot/broker/
